@@ -54,7 +54,7 @@ adds a symbol to the queue in the Document class
 void Document::add(Symbol& toAdd){
   if((!doc.empty())){
       if((doc.back().word == "\\") && (toAdd.word == "\\")){
-	return;
+    return;
       }
   }
   if(toAdd.word == ""){
@@ -121,7 +121,7 @@ tuple<string, string, string> RTFParser::getParamAndCom(string& command){
   while(*s != '\0'){
     if(isdigit(*s)){
       if(com.empty()){
-	com = ncommand.substr(0, i);
+    com = ncommand.substr(0, i);
       }
       param[0] += ncommand.at(i);
       state = 1;
@@ -129,12 +129,12 @@ tuple<string, string, string> RTFParser::getParamAndCom(string& command){
     else if(*s == ' '){
       state = 1;
       if(com.empty()){
-	com = ncommand.substr(0, i);
+    com = ncommand.substr(0, i);
       }
       ++s;
       while(*s != '\0'){
-	param[1] += *s;
-	++s;
+    param[1] += *s;
+    ++s;
       }
       goto end;
     }
@@ -162,27 +162,27 @@ tuple<string, string, string> RTFParser::getParamAndCom(string& command){
      for(unsigned int i=0;i<line.length();++i){
        switch(line.at(i)){
        case '{':
-	 brace = true;
-	 s = new Symbol('b', line.at(i), 0);
-	 doc->add(*s);
-	 break;
+     brace = true;
+     s = new Symbol('b', line.at(i), 0);
+     doc->add(*s);
+     break;
        case '}':
-	 s = new Symbol('b', line.at(i), 0);
-	 doc->add(*s);
-	 brace = false;
-	 break;
+     s = new Symbol('b', line.at(i), 0);
+     doc->add(*s);
+     brace = false;
+     break;
        case '\\':
-	 c = line.substr(i, line.length());
-	 s = commandHandler(c);
-	 counter = atoi(s->word.c_str());
-	 ++s;
-	 for(int i=0;i<counter;++i){
-	   doc->add(*s);
-	   ++s;
-	 }
-	 break;
+     c = line.substr(i, line.length());
+     s = commandHandler(c);
+     counter = atoi(s->word.c_str());
+     ++s;
+     for(int i=0;i<counter;++i){
+       doc->add(*s);
+       ++s;
+     }
+     break;
        default:
-	 break;
+     break;
        }
 
      }
@@ -221,13 +221,13 @@ tuple<string, string, string> RTFParser::getParamAndCom(string& command){
      }
      if(temp2.word == "3"){
        if(t.get<0>() == "insrsid"){
-	 s[3].symbol = PT;
+     s[3].symbol = PT;
        }
        if((t.get<0>() == "b") || (t.get<0>() == "i") || (t.get<0>() == "ulnone")){
-	 s[3].symbol = PT;
+     s[3].symbol = PT;
        }
        if(t.get<0>() == "generator"){
-	 s[3].word = " xclerk.net generator";
+     s[3].word = " xclerk.net generator";
        }
      }
      s[0] = temp2;
@@ -253,9 +253,9 @@ void WriteDocument::write(string filename){
       word = it->word;
       size = word.size();
       if(it->word.size() != 0){
-	if(it->word.at((it->word.size()-1)) == '\r'){
-	  it->word += '\n';
-	}
+    if(it->word.at((it->word.size()-1)) == '\r'){
+      it->word += '\n';
+    }
       }
       file << it->word;
     }
@@ -276,14 +276,14 @@ void WriteDocument::replace(const vector<string>& lines){
   while(1){
     if((sit!=lines.end())){
       if((it->symbol == PT)){
-	for(unsigned int i=0;i<it->word.size();++i){
-	  if(it->word.at(i) == '$'){
-	    log << it->word;
-	    it->word = space + *sit + space;
-	    ++sit;
-	    break;
-	  }
-	}
+    for(unsigned int i=0;i<it->word.size();++i){
+      if(it->word.at(i) == '$'){
+        log << it->word;
+        it->word = space + *sit + space;
+        ++sit;
+        break;
+      }
+    }
       }
     }
     else {

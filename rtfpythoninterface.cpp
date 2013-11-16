@@ -216,8 +216,8 @@ static PyObject* wrap_get_doc(PyObject* self, PyObject* args){
       stemp = new rtfSymbol::Symbol(*it);
       ptemp = static_cast<void *>(stemp);
       if(PyList_Append(plist, PyCObject_FromVoidPtr(ptemp, PyDelSymbol)) != 0){
-	PyErr_Format(PyExc_TypeError, "Cannot get document");
-	return NULL;
+        PyErr_Format(PyExc_TypeError, "Cannot get document");
+        return NULL;
       }
     }
     
@@ -280,7 +280,7 @@ static PyObject * wrap_RTFParser(PyObject * self, PyObject * args){
   const char *s = 0;
   if(!PyArg_ParseTuple( args, "s", &s)){
     return NULL;
-  }	
+  }
   std::string ss(s);
   RTFParser *parser = new RTFParser(ss);
   return PyCObject_FromVoidPtr( parser, PyDelParser);
@@ -312,11 +312,11 @@ PyMODINIT_FUNC init_PyRtfParser(void)
 {
   PyObject *m = 
     Py_InitModule4(
-		   "_PyRtfParser",   // name of the module
-		   rtfparserMethods,  // name of the method table
-		   "C++ RTF parser class", // doc string for module
-		   0,   // last two never change
-		   PYTHON_API_VERSION);
+                   "_PyRtfParser",   // name of the module
+                   rtfparserMethods,  // name of the method table
+                   "C++ RTF parser class", // doc string for module
+                   0,   // last two never change
+                   PYTHON_API_VERSION);
   if (m == NULL){
     return;
   }

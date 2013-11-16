@@ -49,19 +49,19 @@ namespace Parser{
       std::vector<rtfSymbol::Symbol> getDoc();
       void parse();
       RTFParser(std::string& nfile){
-	file.open(nfile.c_str());
-	docTypes::DocType *t = new docTypes::PlainText();
-	doc = new Parser::Document(t);
+        file.open(nfile.c_str());
+        docTypes::DocType *t = new docTypes::PlainText();
+        doc = new Parser::Document(t);
 
       }
       RTFParser(std::string& nfile, docTypes::DocType* d){
-	file.open(nfile.c_str());
-	doc = new Parser::Document(d);
+        file.open(nfile.c_str());
+        doc = new Parser::Document(d);
       }
       RTFParser(const char* nfile){
-	file.open(nfile);
-	docTypes::DocType *t;
-	doc = new Parser::Document(t);
+        file.open(nfile);
+        docTypes::DocType *t;
+        doc = new Parser::Document(t);
       }
       std::vector<std::string> makeDoc();
       ~RTFParser(){}
@@ -74,7 +74,7 @@ namespace Parser{
       void write(std::string filename);
       void replace(const std::vector<std::string>& lines);
       WriteDocument(const WriteDocument& wd):Document(wd.type){
-	doc = wd.doc;
+        doc = wd.doc;
       }
       WriteDocument(){}
     };
@@ -85,7 +85,7 @@ namespace Parser{
     public:
       RTFWriter();
       RTFWriter(std::string file, std::vector<rtfSymbol::Symbol> doc): wd(doc, (new docTypes::RTFText())){
-	filename = file;
+        filename = file;
       }
       RTFWriter(std::string file):filename(file){}
       void write();
